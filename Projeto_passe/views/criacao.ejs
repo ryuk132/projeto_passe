@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Bem vindo(a) ao <%= title %></p>
+    <br/>
+    <form name="frmGeracaoCartao" method="POST">
+        <textarea class="naoRedimensionavel" name="txtRegras" disabled cols="70" rows="10">
+            Regra 1
+            Regra 2
+            Regra 3
+            regra 4
+            regra 5
+            regra ...
+            Ao clicar no botão abaixo você aceita
+            as regras deste aplicativo
+        </textarea>
+    <br/>
+
+        <input type=submit value="Concordo" id="btnGerar" />
+        <%
+          if (resultado!=="0")
+          {
+        %>
+          <p>O número do bilhete gerado foi <%=resultado%> %></p>
+         <% } %>
+         %>
+        </label></p>
+        <p>Anote esse número para não perdê-lo!!</p>
+  </form>
+  <a href="/">Início</a>
+  </body>
+</html>

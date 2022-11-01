@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Bem vindo(a) ao <%= title %></p>
+    <br/>
+    <form id="frmRecarregaCartao" action="/registraRecarga" method="post">
+        <h3>Identificação do cartão</h3>
+        Digite o número do seu cartão: <input type="text" name="txtNumero">
+        <hr/>
+        <h3>Categorias de recarga</h3>
+        
+        <label><input type="radio" id="cat1" name="idCategoria" value="1" checked> Único</label><br/>
+        <label><input type="radio" id="cat2" name="idCategoria" value="2"> Duplo</label><br/>
+        <label><input type="radio" id="cat3" name="idCategoria" value="3"> 7 dias</label><br/>
+        <label><input type="radio" id="cat4" name="idCategoria" value="4"> 30 dias</label><br/>
+        <hr/>
+        <input type="submit" value="Recarregar"><br/>
+    </form>
+  </body>
+  <a href="/">Início</a>
+</html>

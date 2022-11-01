@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Bem vindo(a) ao <%= title %></p>
+    <br/>
+    <form id="frmResultadoRecarga">
+        <%
+          if (resultado!=="0")
+          {
+        %>
+          <p>Resultado da operação: <%=resultado%> %></p>
+         <% } %>
+         %>
+
+    </form>
+    <a href="/">Início</a>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Bem vindo(a) ao <%= title %></p>
+    <br/>
+    <form id="frmPedeUso" action="/fazUso" method="post">
+        <h3>Uso do Passe</h3>
+        Digite o número do seu cartão: <input type="text" name="txtNumero">
+        <hr/>
+        <input type="submit" value="Registrar uso"><br/>
+    </form>
+  </body>
+  <a href="/">Início</a>
+</html>

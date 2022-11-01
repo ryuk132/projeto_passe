@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="estilo1">
+        <p>Bem vindo(a) ao <%= title %></p>
+    </div>
+
+    <br/>
+    <form id="frmListaCat">
+        <h3>Relatório de Uso</h3>
+        <table style="width:50%">
+            <thead>
+                <tr style="background-color:#CCC">
+                  <td>Código do bilhete</td>
+                  <td>Criação</td>
+                  <td>Recarga</td>
+                  <td>Categoria</td>
+                  <td>Primeiro Uso</td>
+                  <td>Expiração</td>
+                  <td>Segundo Uso</td>
+                  <td>Expiração</td>
+                  <!--<td>Expirado?</td>-->
+                </tr>
+            </thead>
+            <tbody>
+                <% if (!resultados || resultados.length == 0) { %>
+                    <tr>
+                        <td colspan="4">Nenhuma categoria cadastrada.</td>
+                    </tr>
+                <% }
+                  else {
+                    resultados.forEach(function(uso){
+                      var dataC = new Date(uso.dataCriacao);
+                      var dataR = new Date(uso.dataRecarga);
+                      var dataP = new Date(uso.dataPrimeiroUso);
+                      var dataE = new Date(uso.dataExpiracao);
+                      if (uso.dataSegundoUso == null)
+                         var dataS = "-o-";
+                      else
+                        var dataS = new Date(uso.dataSegundoUso).toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
+                      
+                      if (uso.dataSegundaExpiracao == null)
+                        var dataSE = "-o-";
+                     else
+                       var dataSE = new Date(uso.dataSegundaExpiracao).toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
+                      %>
+                    <tr>
+                        <td><%= uso.codigo%></td>
+                        <td><%= dataC.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}) %></td>
+                        <td><%= dataR.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}) %></td>
+                        <td><%= uso.descricaoCategoria %></td>
+                        <td><%= dataP.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}) %></td>
+                        <td><%= dataE.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}) %></td>
+                        <td><%= dataS %></td>
+                        <td><%= dataSE %></td>
+
+                    </tr>
+                    <%})
+                      }
+                %>
+            </tbody>
+        </table>
+    </form>
+    <a href="/">Início</a>
+  </body>
+</html>

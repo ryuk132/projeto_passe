@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div class="estilo1">
+        <p>Bem vindo(a) ao <%= title %></p>
+    </div>
+
+    <br/>
+    <form id="frmReltUso" action="/relatUso" method="post">
+        <h3>Emissão de relatório de uso</h3>
+        Digite o número do seu cartão: <input type="text" name="txtNumero">
+        <hr/>
+        <input type="submit" value="Listar"><br/>
+    </form>
+  </body>
+  <p>
+  <a href="/">Início</a>
+</p>
+</html>

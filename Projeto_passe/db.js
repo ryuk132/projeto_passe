@@ -24,7 +24,7 @@ connect();
 async function selectCategorias()
 {
     const conn = await connect();
-    console.log("Vai buscar as categorias no BD");
+    //console.log("Vai buscar as categorias no BD");
     const [rows] = await conn.query("Select * from categoria;");
     return rows;    
 }
@@ -43,13 +43,13 @@ function codigoAleatorio(tamanho)
 async function insertBilhete()
 {
     let resultadoInsert = "0";
-    console.log("Em insertBihete, vai conectar ao BD");
+    //console.log("Em insertBihete, vai conectar ao BD");
     const conn = await connect();  // obtém a conexão ao BD
     var dataCriacao = new Date().toISOString().slice(0, 19).replace('T', ' ');
     var codigo = codigoAleatorio(10);
     const sql = "INSERT INTO bilhete (dataCriacao, codigo) values (?,?);";// insert com parâmetros "?"
 
-    console.log("O novo codigo é "+codigo+" a data é "+dataCriacao);
+    //console.log("O novo codigo é "+codigo+" a data é "+dataCriacao);
     try{
       let resultadoInsert = await conn.query(sql,[dataCriacao,codigo]);  // substitui os parâmetros pelos valores entre [ e ]
     }
@@ -68,7 +68,7 @@ async function recargaBilhete(codigoBilhete, categoriaDesejada)
 
     if (rows.length == 0)   // código do bilhete não encontrado. Retorna com mensagem.
     {
-       console.log("DB.JS: Não achou "+codigoBilhete+" "+categoriaDesejada);
+       //console.log("DB.JS: Não achou "+codigoBilhete+" "+categoriaDesejada);
        return "Bilhete não encontrado";
     }
 
@@ -77,18 +77,12 @@ async function recargaBilhete(codigoBilhete, categoriaDesejada)
 
     const sqlRecarga = "SELECT idRecarga FROM Recarga WHERE idBilhete=?";
     const [rowsRecarga] = await conn.query(sqlRecarga, [rows[0].idBilhete]);
-/*
-posteriormente, após testar e confirmar que não precisa atualizar recargas, podemos
-remover esses trechos comentados
-    if (rowsRecarga.length == 0)  // bilhete não tem nenhuma recarga ainda
-    {
-       console.log("DB.JS: Não achou recarga de "+codigoBilhete+" "+categoriaDesejada);
-*/
+
     // vamos inserir um registro de recarga para esse bilhete:
 
         const sqlRec = "INSERT INTO Recarga "+
                     "(idBilhete, codigoCategoria, dataRecarga, estaExpirado) "+
-                    "values ( ?, ?, ?, 0);";// insert com parâmetros "?"
+                    "values ( ?, ?, ?, 0);";// insert com parâmetros "?" "0/1" é a verificação se a recarga esta expirada
         var dataCriacao = new Date();
         try
         {
@@ -101,29 +95,6 @@ remover esses trechos comentados
         }
         return "Recarga bem sucedida.";
 
- /*
-    }
-   else    // aqui, temos um bilhete com alguma recarga já registrada anteriormente
-    {       // e vamos atualizá-la.
-        var dataRecarga = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        const sqlRec =  "UPDATE Recarga "+
-                        "SET codigoCategoria = ?, dataRecarga = ?, dataPrimeiroUso = null, "+
-                        "    dataExpiracao = null, dataSegundoUso = null, "+
-                        "    dataSegundaExpiracao = null, estaExpirado = false "+
-                        "WHERE idRecarga = ?";
-       
-        try
-        {
-            let resultadoUpdate = await conn.query(sqlRec,
-                [categoriaDesejada, dataRecarga, rowsRecarga[0].idRecarga, ]);  // substitui os parâmetros pelos valores entre [ e ]
-        }
-        catch (erro)
-        {
-            return "Impossível atualizar recarga para esse bilhete. Verifique.";
-        }
-        return "Atualização de recarga desse bilhete bem sucedida.";
-    }
-    */
 }
 
 async function usaBilhete(codigoBilhete)
@@ -142,9 +113,9 @@ async function usaBilhete(codigoBilhete)
     // um registro dessa tabela ao registro da tabela Bilhete
     // que acabamos de acessar:
 
-    console.log("DB.JS/fazUso: Bilhete encontrado com id: "+rows[0].idBilhete);
+    //console.log("DB.JS/fazUso: Bilhete encontrado com id: "+rows[0].idBilhete);
 
-    // 1. buscar uma recarga junto comcategoria do bilhete para 
+    // 1. buscar uma recarga junto com a categoria do bilhete para 
     //    saber se bilhete já foi carregado, se não expirou e quantos
     //    minutos tem de duração o seu tempo de uso, de acordo com sua categoria
     const sqlRecarga = "SELECT idRecarga, R.codigoCategoria, validadeEmMinutos, "+
@@ -157,24 +128,24 @@ async function usaBilhete(codigoBilhete)
     const [rowsRec] = await conn.query(sqlRecarga, [rows[0].idBilhete]);
     if (rowsRec.length == 0)
     {
-        console.log("DB.JS/usaBilhete: Não achou recargas de "+codigoBilhete);
+        //console.log("DB.JS/usaBilhete: Não achou recargas de "+codigoBilhete);
         return "Bilhete não encontrado";
     }
 
-    console.log("DB.JS/usaBilhete: encontrou recarga: "+rowsRec[0].idRecarga);
+    //console.log("DB.JS/usaBilhete: encontrou recarga: "+rowsRec[0].idRecarga);
     
     if (rowsRec[0].dataPrimeiroUso == null) // ainda não foi usado
     {
-        console.log("DB.JS/fazUso: bilhete ainda não foi usado.");
+        //console.log("DB.JS/fazUso: bilhete ainda não foi usado.");
         var dataUso = new Date();           // cria objeto com a data atual
         var dataExpiracao = new Date();     // cria outro objeto com a data atual
         var dataU = dataUso.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
-        console.log("DB.JS/fazUso: dataCriacao: "+dataU);
-        console.log("DB.JS/fazUso: vai somar "+rowsRec[0].validadeEmMinutos+" minutos");
+       //console.log("DB.JS/fazUso: dataCriacao: "+dataU);
+       //console.log("DB.JS/fazUso: vai somar "+rowsRec[0].validadeEmMinutos+" minutos");
         dataExpiracao.setMinutes(dataExpiracao.getMinutes()+rowsRec[0].validadeEmMinutos);
         var dataE= dataExpiracao.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}); 
     
-        console.log("DB.JS/fazUso: Expiração:"+dataE);
+        //console.log("DB.JS/fazUso: Expiração:"+dataE);
 
         const sqlUso = "UPDATE recarga "+
                        "SET dataPrimeiroUso = ?, "+
@@ -182,36 +153,36 @@ async function usaBilhete(codigoBilhete)
                        "WHERE idRecarga = ?";
        try
        {
-          console.log(dataUso);
-          console.log(dataExpiracao);
-          let resultadoUpdate = await conn.query(sqlUso, [dataUso, dataExpiracao, rowsRec[0].idRecarga]);  // substitui os parâmetros pelos valores entre [ e ]
+          //console.log(dataUso);
+          //console.log(dataExpiracao);
+          let resultadoUpdate = await conn.query(sqlUso, [dataUso, dataExpiracao, rowsRec[0].idRecarga]);  // substitui os parâmetros pelos valores entre [ e ] fazendo a atualizacao com os dados do primeiro uso do bilhete
        }
        catch (erro)
        {
-            console.log(erro);
+            //console.log(erro);
             return "Impossível atualizar essa recarga. Verifique.";
        }
       return "Registro de uso bem sucedido. Pode utilizar até "+dataE;
     }
     else
     {
-        console.log("DB.JS/fazUso: bilhete já foi usado. Verificando validade.");
+        //console.log("DB.JS/fazUso: bilhete já foi usado. Verificando validade.");
         var dataAtual = new Date();
         var dataExpiracao = new Date();
-        console.log(dataAtual.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}));
-        console.log(rowsRec[0].dataExpiracao);
+        //console.log(dataAtual.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"}));
+        //console.log(rowsRec[0].dataExpiracao);
         if (dataAtual > rowsRec[0].dataExpiracao)  
            if (rowsRec[0].codigoCategoria == 2)
             {
-                console.log("DB.JS/fazUso: Bilhete duplo, vou ver o que faço.");
+                //console.log("DB.JS/fazUso: Bilhete duplo, vou ver o que faço.");
                 if (rowsRec[0].dataSegundoUso == null)
                 {
-                    console.log("Ainda pode usar uma segunda vez.");
+                    //console.log("Ainda pode usar uma segunda vez.");
                     var dataC= dataAtual.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
                     
                     dataExpiracao.setMinutes(dataExpiracao.getMinutes()+rowsRec[0].validadeEmMinutos);
                     var dataE= dataExpiracao.toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"});
-                    console.log("DB.JS/fazUso: Nova expiração:"+dataE);
+                    //console.log("DB.JS/fazUso: Nova expiração:"+dataE);
 
                     const sqlUso = "UPDATE recarga "+
                        "SET dataSegundoUso = ?, "+
@@ -230,10 +201,10 @@ async function usaBilhete(codigoBilhete)
                 }
                 else  // já tem registro de segundo uso, verificar se está dentro do prazo
                 {
-                    console.log("DB.JS/fazUso: Bilhete duplo já com 2o uso, vou ver validade!");
+                    //console.log("DB.JS/fazUso: Bilhete duplo já com 2o uso, vou ver validade!");
                     var dataAtual = new Date();
-                    console.log(dataAtual);
-                    console.log(rowsRec[0].dataSegundaExpiracao);
+                    //console.log(dataAtual);
+                    //console.log(rowsRec[0].dataSegundaExpiracao);
                     if (dataAtual > rowsRec[0].dataSegundaExpiracao)  
                     {
                         const sqlUso =  "UPDATE recarga "+
@@ -245,7 +216,7 @@ async function usaBilhete(codigoBilhete)
                         }
                         catch (erro)
                         {
-                            console.log(erro);
+                            //console.log(erro);
                             return "Impossível atualizar essa recarga. Verifique.";
                         }
                         return "Bilhete duplo expirado!";
@@ -265,7 +236,7 @@ async function usaBilhete(codigoBilhete)
                 }
                 catch (erro)
                 {
-                    console.log(erro);
+                    //console.log(erro);
                     return "Impossível incluir essa recarga. Verifique.";
                 }
                 return "Bilhete expirado!";
@@ -280,7 +251,7 @@ async function usaBilhete(codigoBilhete)
 async function selectUsos(codigoBilhete)
 {
     const conn = await connect();
-    console.log("Vai buscar os usos do Bilhete "+codigoBilhete+" no BD");
+    //console.log("Vai buscar os usos do Bilhete "+codigoBilhete+" no BD");
     var sql = "Select b.idBilhete, b.dataCriacao, b.codigo, "+
     "       r.idRecarga, r.codigoCategoria, c.descricaoCategoria, "+
     "       r.dataRecarga, r.dataPrimeiroUso, r.dataExpiracao, "+

@@ -54,11 +54,11 @@ router.get('/recarga', function(req, res, next) {
 router.post('/registraRecarga', async function(req, res, next) {
   const codBil = req.body.txtNumero;
   const categoria = req.body.idCategoria;
-  console.log("Index.JS: Bilhete ="+codBil+" categoria ="+categoria);
+  //console.log("Index.JS: Bilhete ="+codBil+" categoria ="+categoria);
   try
   {
     const resultado = await global.db.recargaBilhete(codBil, categoria);
-    console.log("INDEX.JS após chamar recargaBilhete: "+resultado);
+    //console.log("INDEX.JS após chamar recargaBilhete: "+resultado);
     res.render('registraRecarga', { title: 'Recarga', resultado });
   }
   catch (erro)
@@ -74,11 +74,11 @@ router.get('/uso', function(req, res, next) {
 
 router.post('/fazUso', async function(req, res, next) {
   const codBil = req.body.txtNumero;
-  console.log("Index.JS/fazUso: Bilhete ="+codBil);
+  //console.log("Index.JS/fazUso: Bilhete ="+codBil);
   try
   {
     const resultado = await global.db.usaBilhete(codBil);
-    console.log("INDEX.JS após chamar usaBilhete: "+resultado);
+    //console.log("INDEX.JS após chamar usaBilhete: "+resultado);
     res.render('fazUso', { title: 'Uso do Passe', resultado });
   }
   catch (erro)
@@ -96,9 +96,9 @@ router.post("/relatUso", async function(req, res) {
   try
   {
     var codigoBilhete = req.body.txtNumero;
-      console.log("Index.JS: Vai escrever relatório de uso do bilhete: "+codigoBilhete);
+      //console.log("Index.JS: Vai escrever relatório de uso do bilhete: "+codigoBilhete);
       const resultados = await global.db.selectUsos(codigoBilhete);
-      console.log(resultados);
+      //console.log(resultados);
       res.render("relatUso", 
            {title:'Relatório de Uso'+codigoBilhete, resultados});
   }

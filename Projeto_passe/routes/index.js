@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/criar', function(req, res, next) {
-  res.render('criacao', { title: 'Passe Urbano / Criação', resultado:"0"});
+  res.render('criacao', { title: 'Criação', resultado:"0"});
 });
 
 router.post("/criar", async (req, res) => {
@@ -25,7 +25,7 @@ router.post("/criar", async (req, res) => {
     }
 
     console.log("Codigo criado "+resultadoInsert);
-    res.render('criacao', { title: 'Passe Urbano / Criação', resultado: resultadoInsert});
+    res.render('criacao', { title: 'Criação', resultado: resultadoInsert});
   }
   catch (erro)
   {
@@ -39,7 +39,7 @@ router.get("/categ", async function(req, res) {
       console.log("Vai escrever categorias resultantes");
       const resultados = await global.db.selectCategorias();
       console.log(resultados);
-      res.render("categ", {title:'Passe Urbano/Lista de Categorias', resultados});
+      res.render("categ", {title:'Lista de Categorias', resultados});
   }
   catch (erro)
   {
@@ -48,7 +48,7 @@ router.get("/categ", async function(req, res) {
 });
 
 router.get('/recarga', function(req, res, next) {
-  res.render('recarga', { title: 'Passe Urbano / Recarga'});
+  res.render('recarga', { title: 'Recarga'});
 });
 
 router.post('/registraRecarga', async function(req, res, next) {
@@ -59,7 +59,7 @@ router.post('/registraRecarga', async function(req, res, next) {
   {
     const resultado = await global.db.recargaBilhete(codBil, categoria);
     console.log("INDEX.JS após chamar recargaBilhete: "+resultado);
-    res.render('registraRecarga', { title: 'Passe Urbano / Recarga / Resultado', resultado });
+    res.render('registraRecarga', { title: 'Recarga', resultado });
   }
   catch (erro)
   {
@@ -69,7 +69,7 @@ router.post('/registraRecarga', async function(req, res, next) {
 });
 
 router.get('/uso', function(req, res, next) {
-  res.render('uso', { title: 'Passe Urbano / Uso do Passe' });
+  res.render('uso', { title: 'Uso do Passe' });
 });
 
 router.post('/fazUso', async function(req, res, next) {
@@ -79,7 +79,7 @@ router.post('/fazUso', async function(req, res, next) {
   {
     const resultado = await global.db.usaBilhete(codBil);
     console.log("INDEX.JS após chamar usaBilhete: "+resultado);
-    res.render('fazUso', { title: 'Passe Urbano / Uso do Passe / Resultado', resultado });
+    res.render('fazUso', { title: 'Uso do Passe', resultado });
   }
   catch (erro)
   {
@@ -89,7 +89,7 @@ router.post('/fazUso', async function(req, res, next) {
 });
 
 router.get('/relat', function(req, res, next) {
-  res.render('relat', { title: 'Passe Urbano / Relatório de Uso' });
+  res.render('relat', { title: 'Relatório de Uso' });
 });
 
 router.post("/relatUso", async function(req, res) {
@@ -100,7 +100,7 @@ router.post("/relatUso", async function(req, res) {
       const resultados = await global.db.selectUsos(codigoBilhete);
       console.log(resultados);
       res.render("relatUso", 
-           {title:'Passe Urbano / Relatório de Uso / Uso do Bilhete '+codigoBilhete, resultados});
+           {title:'Relatório de Uso'+codigoBilhete, resultados});
   }
   catch (erro)
   {

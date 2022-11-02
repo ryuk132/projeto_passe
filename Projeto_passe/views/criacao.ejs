@@ -6,21 +6,20 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Bem vindo(a) ao <%= title %></p>
     <br/>
     <form name="frmGeracaoCartao" method="POST">
         <textarea class="naoRedimensionavel" name="txtRegras" disabled cols="70" rows="10">
-            Regra 1
-            Regra 2
-            Regra 3
-            regra 4
-            regra 5
-            regra ...
-            Ao clicar no botão abaixo você aceita
-            as regras deste aplicativo
+          Regra 1- Ao clicar no botao concordo você esta sujeito aos termos de uso!
+        
+          Regra 2- Cookies do site são pequenos arquivos de texto enviados pelo site ao computador do usuário com informações relacionadas à navegação do site.
+              
+          Regra 3- O site se compromete as medidas técnicas e organizativas a proteger os dados pessoais.
+              
+          Regra 4- Os dados do bilhete ou seja o codigo gerado sera coletado apenas para finalidade validar sua utilização. 
         </textarea>
     <br/>
 
+    <section>
         <input type=submit value="Concordo" id="btnGerar" />
         <%
           if (resultado!=="0")
@@ -31,6 +30,7 @@
          %>
         </label></p>
         <p>Anote esse número para não perdê-lo!!</p>
+    </section>
   </form>
   <a href="/">Início</a>
   </body>

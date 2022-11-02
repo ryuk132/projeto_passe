@@ -1,71 +1,20 @@
 body {
-  background-image: url(https://media.discordapp.net/attachments/677660386295545856/1035014503898824764/unknown.png);
-  background-size: 100vw;
-  height: 100vh;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  margin: 0;
-}
-
-form{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-}
-
-h1 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  color:white;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  width: 403px;
-  height: 130px;
-  font-style: italic;
-  font-weight: 900;
-  font-size: 40px;
-  line-height: 48px;
+  color: #00B7FF;
 }
 
-.botoes li {
-  list-style: none;
-  background: #c68019;
-  border-radius: 10px;
-  margin: 15px;
+.estilo1
+{
+  background-color: aquamarine;
+  font-style:italic;
+  font-weight: bold;
 }
 
-.botoes{
-  align-self:flex-end;
-}
-
-.motivacional p {
-  color: white;
-  font-weight: 950;
-  font-style: italic;
-}
-.motivacional{
-  align-self: flex-start;
-  font-size: 30px;
-  line-height: 48px;
-}
-.botoes li:hover {
-  background-color: rgb(112, 65, 0);
-}
-
-.naoRedimensionavel {
+.naoRedimensionavel
+{
   resize: none;
-  height: 400px;
-  width: 600px;
-  text-align-last: left;
 }

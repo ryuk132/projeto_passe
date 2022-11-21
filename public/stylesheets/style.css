@@ -1,27 +1,32 @@
-body {
-  background-image: url(https://media.discordapp.net/attachments/677660386295545856/1035014503898824764/unknown.png);
+/*mexi aqui no body*/
+body
+{
+  background-image: url(https://img.freepik.com/vetores-gratis/fundo-digital-do-espaco-azul-da-copia_23-2148821698.jpg?w=740&t=st=1668992171~exp=1668992771~hmac=be89c0ad9c5c1da8344aa9c316a1eeb5a7e656a2411371ab3b1edbc53d15e725);
   background-size: 100vw;
   height: 100vh;
   display: flex;
   width: 100%;
   flex-direction: column;
   margin: 0;
+
+  
 }
 
-form {
+form{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: 100%;
   width: 100%;
+
 }
 
 h1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: white;
+  color:white;
 }
 
 textarea {
@@ -59,46 +64,45 @@ a {
   align-items: center;
   color: white;
   width: 403px;
-  height:130px;
+  height: 130px;
   font-style: italic;
   font-weight: 900;
   font-size: 40px;
   line-height: 48px;
 }
-
 .botoes li {
   list-style: none;
-  background:#c68019;
+  background: #4991cc;
   border-radius: 10px;
   margin: 15px;
 }
 
-.botoes li:hover{
-  background-color: black;
+.botoes li:hover {
+background-color: rgb(101, 188, 217);
+}
+ 
+
+.botoes{
+align-self:flex-end;
 }
 
-.botoes {
-  align-self:flex-end;
-}
 
 .motivacional p {
   color: white;
   font-weight: 950;
   font-style: italic;
 }
-
-.motivacional {
+.motivacional{
   align-self: flex-start;
   font-size: 30px;
   line-height: 48px;
 }
 
-.naoRedimensionavel
+
+.estilo1
 {
-  resize: none;
-  height: 400px;
-  width: 600px;
-  text-align-last: left;
+  font-style:italic;
+  font-weight: bold;
 }
 
 .titulo {
@@ -109,4 +113,21 @@ a {
   align-self: flex-start;
   font-size: 30px;
   
+}
+
+/* foi mudado backgroud */
+.naoRedimensionavel
+{
+  background:rgb(192, 195, 195);
+  resize: none;
+  height: 400px;
+  width: 600px;
+  text-align-last: left;
+}
+
+/* foi mudado aqui */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }

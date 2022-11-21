@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* Página que exibe lista de categorias cadastradas no Banco de Dados */
 router.get('/categ', function(req, res, next) {
     res.render('categ', { title: 'Passe Urbano / Lista de Categorias'});
   });

@@ -8,7 +8,7 @@ var router = express.Router();
 // que exibirá mensagem ao usuário informando o resultado da operação de
 // recarga
 router.get('/recarga', function(req, res, next) {
-  res.render('recarga', { title: 'Passe Urbano / Recarga'});
+  res.render('recarga', { title: 'Recarga'});
 });
 
 module.exports = router;

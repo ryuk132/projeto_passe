@@ -9,7 +9,7 @@ var router = express.Router();
   usuário sobre os resultados da operação.
 */
 router.get('/uso', function(req, res, next) {
-  res.render('uso', { title: 'Passe Urbano / Uso do Passe' });
+  res.render('uso', { title: 'Uso do Passe' });
 });
 
 module.exports = router;

@@ -23,7 +23,7 @@ router.get('/', function(req, res, next)
 
 router.get('/criar', function(req, res, next) 
 {
-  res.render('criacao', { title: 'Passe Urbano / Criação', resultado:"0"});
+  res.render('criacao', { title: 'Criação', resultado:"0"});
 });
 
 //

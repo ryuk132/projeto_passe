@@ -9,7 +9,7 @@ var router = express.Router();
    com os registros de uso do bilhete
 */
 router.get('/relat', function(req, res, next) {
-  res.render('relat', { title: 'Passe Urbano / Relatório de Uso' });
+  res.render('relat', { title: 'Relatório de Uso' });
 });
 
 module.exports = router;
